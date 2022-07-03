@@ -77,7 +77,7 @@ const getCountriesDB = async (name) => {
 
 const getCountriesByID = async (id) => {
 
-    let response = await Country.findAll({
+    let response = await Country.findOne({
         where: {
             id: id
         },
@@ -86,7 +86,7 @@ const getCountriesByID = async (id) => {
     return response
 }
 
-const postActivity = async (name,dificulty,duration,season,countries) => {
+const postActivity = async (name, dificulty, duration, season, countries) => {
 
     const activity = await Turism.create({
         name,
@@ -97,13 +97,103 @@ const postActivity = async (name,dificulty,duration,season,countries) => {
     await getCountriesDB()
 
     let countriesInDB = await Country.findAll({
-        where : {
+        where: {
             name: countries
         }, attributes: ['id']
     })
     activity.addCountry(countriesInDB)
 
     return "Activity created"
+}
+
+const orderByName = async (order) => {
+    let allCountries = await getCountriesDB()
+    if (order === 'Ascendente') {
+        allCountries.sort(function (a, b) {
+            if (a.name > b.name) {
+                return 1
+            }
+            if (b.name > a.name) {
+                return -1
+            }
+            return 0
+        })
+    }
+    else if (order === 'Descendente') {
+        allCountries.sort(function (a, b) {
+            if (a.name > b.name) {
+                return -1
+            }
+            if (b.name > a.name) {
+                return 1
+            }
+            return 0
+        })
+    }
+    return allCountries
+}
+
+const orderByPopulation = async (order) => {
+    let allCountries = await getCountriesDB()
+    if (order === 'Menor') {
+        allCountries.sort(function (a, b) {
+            if (a.population > b.population) {
+                return 1
+            }
+            if (b.population > a.population) {
+                return -1
+            }
+            return 0
+        })
+    }
+    else if (order === 'Mayor') {
+        allCountries.sort(function (a, b) {
+            if (a.population > b.population) {
+                return -1
+            }
+            if (b.population > a.population) {
+                return 1
+            }
+            return 0
+        })
+    }
+    return allCountries
+}
+
+const getActivities = async () => {
+
+    let genres = await Turism.findAll()
+    return genres
+}
+
+const getCountriesWithActivity = async (id) => {
+
+    if (id != "All") {
+        let response = await Turism.findOne({
+            where: {
+                id: id
+            },
+            include: { model: Country }
+        })
+
+        return response.countries
+    }
+    else {
+        let all = await getCountriesDB()
+        return all
+    }
+}
+
+const filterByContinent = async (continent) => {
+
+    let response = await Country.findAll({
+        where: {
+            continent: continent
+        },
+        include: { model: Turism }
+    })
+
+    return response
 }
 
 router.get('/countries', async (req, res, next) => {
@@ -141,6 +231,58 @@ router.post('/activities', async (req, res, next) => {
     try {
         let activityCreated = await postActivity(datos.name, datos.dificulty, datos.duration, datos.season, datos.countries)
         res.json(activityCreated)
+    } catch (error) {
+        next(error)
+    }
+})
+
+router.get('/activities', async (req, res, next) => {
+    let id = req.query.id
+
+    if (id) {
+        let countriesWhitActivity = await getCountriesWithActivity(id)
+
+        try {
+            res.json(countriesWhitActivity)
+        } catch (error) {
+            next(error)
+        }
+    }
+    else {
+        let activities = await getActivities();
+        try {
+            res.json(activities)
+        } catch (error) {
+            next(error)
+        }
+    }
+})
+
+router.get('/nameOrder', async (req, res, next) => {
+    let order = req.query.order
+    let orderCountries = await orderByName(order)
+    try {
+        res.json(orderCountries)
+    } catch (error) {
+        next(error)
+    }
+})
+
+router.get('/populationOrder', async (req, res, next) => {
+    let order = req.query.order
+    let orderCountries = await orderByPopulation(order)
+    try {
+        res.json(orderCountries)
+    } catch (error) {
+        next(error)
+    }
+})
+
+router.get('/continentFilter', async (req, res, next) => {
+    let continent = req.query.continent
+    let countries = await filterByContinent(continent)
+    try {
+        res.json(countries)
     } catch (error) {
         next(error)
     }
