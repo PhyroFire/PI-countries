@@ -12,6 +12,7 @@ import FilterActivity from "./FilterActivity.jsx"
 import FilterContinent from "./FilterContinent.jsx"
 import '../CSS/Home.css'
 import Loading from '../CSS/Imagenes/Loading.gif'
+import VideoHome from '../CSS/Videos/VideoHome.mp4'
 
 export default function Home() {
 
@@ -35,6 +36,7 @@ export default function Home() {
 
     return (
         <div className="Home">
+            <video autoPlay preload="auto" muted loop src={VideoHome}></video>
             <div className="TOP">
                 <h1>Henry's Countries Proyect</h1>
             </div>
