@@ -1,0 +1,29 @@
+.card {
+    border-style: solid;
+    border-radius: 10px;
+    border-color: #aeaeae;
+    width: 300px;
+    height: 300px;
+    margin: 15px;
+    background-size: cover;
+    background-position: center;
+    text-align: center;
+}
+
+
+.card:hover{
+    background-size: cover;
+    background-position: center;
+    transform: translateY(-15px);
+    box-shadow: 20px 20px 30px rgba(0,0,0,0.7);
+ }
+
+.card a {
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+
+.card a:visited {
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}

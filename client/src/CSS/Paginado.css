@@ -1,0 +1,6 @@
+.Paginado {
+    display: flex;
+    list-style: none;
+    justify-content: center;
+    flex-wrap: wrap;
+}

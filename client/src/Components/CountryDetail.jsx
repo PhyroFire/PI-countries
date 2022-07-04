@@ -4,6 +4,7 @@ import { getCountryById } from "../Actions/Index";
 import React from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import "../CSS/CountryDetail.css"
 
 export default function Detail() {
 

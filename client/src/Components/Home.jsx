@@ -10,6 +10,8 @@ import FilterName from "./FilterName.jsx";
 import FilterPopulation from "./FilterPopulation.jsx"
 import FilterActivity from "./FilterActivity.jsx"
 import FilterContinent from "./FilterContinent.jsx"
+import '../CSS/Home.css'
+import Loading from '../CSS/Imagenes/Loading.gif'
 
 export default function Home() {
 
@@ -32,15 +34,12 @@ export default function Home() {
     }, [])
 
     return (
-        <div>
-            <h1>HOME</h1>
-            <nav>
-                <Link to={'/about'}><button>ABOUT THIS PAGE</button></Link>
+        <div className="Home">
+            <div className="TOP">
+                <h1>Henry's Countries Proyect</h1>
+            </div>
 
-                <Link to='/'><button>Back to start</button></Link>
-
-                <SearchBar />
-
+            <nav className="Nav_Home">
                 <FilterName />
 
                 <FilterPopulation />
@@ -48,34 +47,39 @@ export default function Home() {
                 <FilterActivity />
 
                 <FilterContinent />
+            </nav>
+
+            <nav className="MainNav">
+                <SearchBar />
+
+                <Link to={'/about'}><button>ABOUT THIS PAGE</button></Link>
+
+                <Link to='/'><button>Back to start</button></Link>
 
                 <Link to={'/activity'}><button>CREATE ACTIVITY!</button></Link>
             </nav>
 
-            <div>
-
-                <Paginado
-                    countriesXPage={countriesXPage}
-                    allCountries={countries.length}
-                    pages={pages}
-                    currentPage={currentPage}
-                />
-
-            </div>
+            <Paginado
+                countriesXPage={countriesXPage}
+                allCountries={countries.length}
+                pages={pages}
+                currentPage={currentPage}
+            />
 
             <div className="Cards">
                 {
                     currentCountries.length > 0 ?
                         currentCountries.map(country => {
                             return (
-                                <div>
+                                <div key={country.id} >
                                     <Card name={country.name} id={country.id} img={country.img} continent={country.continent} />
                                 </div>
                             )
                         })
                         :
                         <div>
-                            <h3>Loading</h3>
+                            <h3>Loading...</h3>
+                            <img src={Loading} alt="Cargando" />
                         </div>
                 }
             </div>

@@ -1,4 +1,5 @@
 import React from "react";
+import '../CSS/Paginado.css'
 
 export default function Paginado({ countriesXPage, allCountries, pages, currentPage }) {
 

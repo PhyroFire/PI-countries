@@ -1,0 +1,44 @@
+.Nav_Home{
+    display: flex;
+    justify-content: center;
+    margin: 15px;
+}
+
+.MainNav{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.TOP h1 {
+    font-size: 80px;
+    text-align: center;
+    color: rgb(255, 255, 255);
+    margin: 5px;
+}
+
+.Home {
+    background-image: url('../CSS/Imagenes/wallpaperbetter\ \(1\).jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    height:1060px;
+}
+
+.Nav_Home {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.Cards {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.Home h2 {
+    font-family: 'Assassins';
+    font-size: 50px;
+    text-align: center;
+}

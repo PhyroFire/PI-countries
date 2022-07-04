@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { orderByName, postActivity } from "../Actions/Index";
+import "../CSS/CreateActivity.css"
 
 export default function CreateGame() {
 
@@ -43,7 +44,7 @@ export default function CreateGame() {
     function handleSelectCountry(event) {
         event.preventDefault()
         if (event.target.value !== "Country") {
-            let valorFiltrado = input.countries.find(pais => pais=== event.target.value)
+            let valorFiltrado = input.countries.find(pais => pais === event.target.value)
             if (!valorFiltrado) {
                 setImput({
                     ...input,
@@ -82,9 +83,6 @@ export default function CreateGame() {
 
     return (
         <div className="CreateActivity">
-
-            <Link to='/home'><button id="backToHome">Back to Home!</button></Link>
-
             <h1>Create your own activity !</h1>
             <form onSubmit={(event) => handleSubmit(event)} className="Form">
 
@@ -147,6 +145,7 @@ export default function CreateGame() {
 
                 <button id="submit" type="submit">Create Activity</button>
             </form>
+            <Link to='/home'><button id="backToHome">Back to Home!</button></Link>
         </div>
     )
 }

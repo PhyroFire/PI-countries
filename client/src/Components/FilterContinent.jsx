@@ -24,7 +24,7 @@ export default function FilterContinent() {
                 {
                     continents.map(cont => {
                         return (
-                            <option value={cont}>{cont}</option>
+                            <option key={cont} value={cont}>{cont}</option>
                         )
                     })
                 }

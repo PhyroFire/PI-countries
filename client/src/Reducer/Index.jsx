@@ -2,7 +2,6 @@ const initialState = {
     countries: [],
     country: [],
     activities: [],
-    allCountries: [],
 }
 
 export default function rootReducer(state = initialState, action) {
@@ -13,7 +12,6 @@ export default function rootReducer(state = initialState, action) {
             return {
                 ...state,
                 countries: action.payload,
-                allCountries: action.payload,
             }
         case 'GET_ALL_ACTIVITIES':
             return {
