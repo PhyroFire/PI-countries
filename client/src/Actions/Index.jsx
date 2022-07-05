@@ -1,100 +1,98 @@
 const axios = require('axios');
 
+// export function getAllCountries() {
+//     return function (dispatch) {
+//         fetch('http://localhost:3001/countries')
+//             .then(res => res.json())
+//             .then(resToJson => dispatch({
+//                 type: 'GET_ALL_COUNTRIES',
+//                 payload: resToJson
+//             }))
+//     }
+// }
+
 export function getAllCountries() {
-    return function (dispatch) {
-        fetch('http://localhost:3001/countries')
-            .then(res => res.json())
-            .then(resToJson => dispatch({
-                type: 'GET_ALL_COUNTRIES',
-                payload: resToJson
-            }))
+    return async function (dispatch) {
+        let response = await axios(`/countries`)
+        dispatch({
+            type: "GET_ALL_COUNTRIES",
+            payload: response.data
+        })
     }
 }
 
 export function getAllActivities() {
-    return function (dispatch) {
-        fetch('http://localhost:3001/activities')
-            .then(res => res.json())
-            .then(resToJson => dispatch({
-                type: 'GET_ALL_ACTIVITIES',
-                payload: resToJson
-            }))
+    return async function (dispatch) {
+        let response = await axios('/activities')
+        dispatch({
+            type: 'GET_ALL_ACTIVITIES',
+            payload: response.data
+        })
     }
 }
 
 export function getCountryById(id) {
-    return function (dispatch) {
-        fetch(`http://localhost:3001/countries/${id}`)
-            .then(res => res.json())
-            .then(resToJson => dispatch({
-                type: 'GET_COUNTRY_BY_ID',
-                payload: resToJson
-            }))
+    return async function (dispatch) {
+        let response = await axios(`/countries/${id}`)
+        dispatch({
+            type: 'GET_COUNTRY_BY_ID',
+            payload: response.data
+        })
     }
 }
 
 export function getCountriesByName(name) {
-    return function (dispatch) {
-        try {
-            fetch(`http://localhost:3001/countries?name=${name}`)
-                .then(res => res.json())
-                .then(resToJson => dispatch({
-                    type: 'GET_COUNTRIES_BY_NAME',
-                    payload: resToJson
-                }))
-        } catch (error) {
-            console.log(error)
-        }
+    return async function (dispatch) {
+        let response = await axios(`/countries?name=${name}`)
+        dispatch({
+            type: 'GET_COUNTRIES_BY_NAME',
+            payload: response.data
+        })
     }
 }
 
 export function orderByName(order) {
-    return function (dispatch) {
-
-        fetch(`http://localhost:3001/nameOrder?order=${order}`)
-            .then(res => res.json())
-            .then(resToJson => dispatch({
-                type: 'ORDER_BY_NAME',
-                payload: resToJson
-            }))
+    return async function (dispatch) {
+        let response = await axios(`/nameOrder?order=${order}`)
+        dispatch({
+            type: 'ORDER_BY_NAME',
+            payload: response.data
+        })
     }
 }
 
 export function orderByPopulation(order) {
-    return function (dispatch) {
-        fetch(`http://localhost:3001/populationOrder?order=${order}`)
-            .then(res => res.json())
-            .then(resToJson => dispatch({
-                type: 'ORDER_BY_POPULATION',
-                payload: resToJson
-            }))
+    return async function (dispatch) {
+        let response = await axios(`/populationOrder?order=${order}`)
+        dispatch({
+            type: 'ORDER_BY_POPULATION',
+            payload: response.data
+        })
     }
 }
 
 export function postActivity(payload) {
-    return async function () {
-        await axios.post(`http://localhost:3001/activities`, payload)
+    return function () {
+        axios.post(`/activities`, payload)
     }
 }
 
 export function getCountriesByActivity(activityID) {
-    return function (dispatch) {
-        fetch(`http://localhost:3001/activities?id=${activityID}`)
-            .then(res => res.json())
-            .then(resToJson => dispatch({
-                type: 'GET_COUNTRIES_BY_ACTIVITY',
-                payload: resToJson
-            }))
+    return async function (dispatch) {
+        let response = await axios(`/activities?id=${activityID}`)
+        dispatch({
+            type: 'GET_COUNTRIES_BY_ACTIVITY',
+            payload: response.data
+        })
     }
 }
 
 export function getCountriesByContinents(continent) {
-    return function (dispatch) {
-        fetch(`http://localhost:3001/continentFilter?continent=${continent}`)
-            .then(res => res.json())
-            .then(resToJson => dispatch({
-                type: 'GET_COUNTRIES_BY_CONTINENT',
-                payload: resToJson
-            }))
+    return async function (dispatch) {
+        let response = await axios(`/continentFilter?continent=${continent}`)
+        dispatch({
+            type: 'GET_COUNTRIES_BY_CONTINENT',
+            payload: response.data
+        })
     }
 }
