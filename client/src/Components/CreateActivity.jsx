@@ -5,13 +5,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { orderByName, postActivity } from "../Actions/Index";
 import "../CSS/CreateActivity.css"
 
-export default function CreateGame() {
+export default function CreateActivity() {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const allCountries = useSelector(state => state.countries)
+    const dificulty = [1, 2, 3, 4, 5]
 
-    const [input, setImput] = useState({
+    const [input, setInput] = useState({
         name: "",
         dificulty: 0,
         duration: 0,
@@ -25,7 +26,7 @@ export default function CreateGame() {
 
     function handleInput(event) {
         event.preventDefault()
-        setImput({
+        setInput({
             ...input,
             [event.target.name]: event.target.value
         })
@@ -34,7 +35,7 @@ export default function CreateGame() {
     function handleSelectSeason(event) {
         event.preventDefault()
         if (event.target.value !== "Season") {
-            setImput({
+            setInput({
                 ...input,
                 season: event.target.value
             })
@@ -46,7 +47,7 @@ export default function CreateGame() {
         if (event.target.value !== "Country") {
             let valorFiltrado = input.countries.find(pais => pais === event.target.value)
             if (!valorFiltrado) {
-                setImput({
+                setInput({
                     ...input,
                     countries: [...input.countries, event.target.value]
                 })
@@ -57,7 +58,7 @@ export default function CreateGame() {
     function handleRemoveCountry(event) {
         event.preventDefault()
         let arrayFiltrado = input.countries.filter(pais => pais !== event.target.value)
-        setImput({
+        setInput({
             ...input,
             countries: arrayFiltrado
         })
@@ -71,7 +72,7 @@ export default function CreateGame() {
         }
         dispatch(postActivity(input))
         alert("Activity created!")
-        setImput({
+        setInput({
             name: "",
             dificulty: 0,
             duration: 0,
@@ -111,7 +112,7 @@ export default function CreateGame() {
                 <div className="Label">
                     <label>Duration</label>
                     <input
-                        type='number'
+                        type='time'
                         value={input.duration}
                         name='duration'
                         onChange={(event) => handleInput(event)}
@@ -135,12 +136,20 @@ export default function CreateGame() {
                         {
                             allCountries && allCountries.map(pais => {
                                 return (
-                                    <option value={pais.name}>{pais.name}</option>
+                                    <option key={pais.id} value={pais.name}>{pais.name}</option>
                                 )
                             })
                         }
                     </select>
-                    <ul>{input.countries.map(pais => { return (<li>{pais}<button value={pais} onClick={(event) => handleRemoveCountry(event)}>X</button></li>) })}</ul>
+                    <ul>
+                        {
+                            input.countries.map(pais => {
+                                return (
+                                    <li key={pais}>{pais}<button value={pais} onClick={(event) => handleRemoveCountry(event)}>X</button></li>
+                                )
+                            })
+                        }
+                    </ul>
                 </div>
 
                 <button id="submit" type="submit">Create Activity</button>

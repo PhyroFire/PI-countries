@@ -20,23 +20,50 @@ export default function Detail() {
     return (
         <div className="CountryDetail">
 
-            <h1>{country.name}</h1>
-            <img src={country.img} alt={country.name} />
+            <div id="CountryDetailData">
+                <h1>{country.name}</h1>
+                <img src={country.img} alt={country.name} />
 
-            <p>Country ID: {country.id}</p>
+                <p>Country ID: {country.id}</p>
 
-            <p>Continent: {country.continent}</p>
-            
-            <p>Subregion: {country.subregion}</p>
-            
-            <p>Capital: {country.capital}</p>
-            
-            <p>Area: {country.area}</p>
-            
-            <p>Population: {country.population}</p>
+                <p>Continent: {country.continent}</p>
+
+                <p>Subregion: {country.subregion}</p>
+
+                <p>Capital: {country.capital}</p>
+
+                <p>Area: {country.area}</p>
+
+                <p>Population: {country.population}</p>
+            </div>
+
+            <div id="MainActivity">
+                {
+                    typeof country.turisms === "object" ?
+
+                        country.turisms.length > 0 ?
+                            <h4>Activities</h4>
+                            :
+                            <></>
+                        :
+                        <></>
+                }
+                <div id="ActivitiesBox">
+                    {
+                        country.turisms && country.turisms.map(act =>
+                            <div key={act.id} id="Activities">
+                                <p>Id: {act.id}</p>
+                                <p>Name: {act.name}</p>
+                                <p>Dificulty: {act.dificulty}</p>
+                                <p>Duration: {act.duration} Hours</p>
+                                <p>Season: {act.season}</p>
+                            </div>
+                        )
+                    }
+                </div>
+            </div>
 
             <Link to='/home'><button id="backToHome">Back to Home</button></Link>
-
         </div>
     )
 }

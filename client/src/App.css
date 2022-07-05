@@ -20,7 +20,7 @@ select {
 button{
   cursor: pointer;
   padding: 10px 40px;
-  background: rgb(0, 0, 0);
+  background: rgb(49, 49, 49);
   border: none;
   color: white;
   border-radius: 20px;

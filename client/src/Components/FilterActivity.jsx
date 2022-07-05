@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getCountriesByActivity, getAllActivities } from "../Actions/Index";
 
-export default function FilterActivity() {
+export default function FilterActivity({pages}) {
 
     const dispatch = useDispatch()
     const allActivities = useSelector(state => state.activities)
@@ -13,7 +13,9 @@ export default function FilterActivity() {
     }, [])
 
     function handleGenreFilter(event) {
+        event.preventDefault()
         dispatch(getCountriesByActivity(event.target.value))
+        pages(1)
     }
 
     return (
@@ -24,7 +26,7 @@ export default function FilterActivity() {
                 {
                     allActivities && allActivities.map(act => {
                         return (
-                            <option value={act.id}>{act.name}</option>
+                            <option key={act.id} value={act.id}>{act.name}</option>
                         )
                     })
                 }

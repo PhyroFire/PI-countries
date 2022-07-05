@@ -21,13 +21,15 @@ export default function SearchBar() {
 
     return (
         <div>
-            <input
-                value={name}
-                type='text'
-                placeholder="Search country..."
-                onChange={(event) => handleInput(event)}
-            />
-            <button type="submit" onKeyPress={(event) => handleSubmit(event)} onClick={(event) => handleSubmit(event)}>Search</button>
+            <form onSubmit={(event) => handleSubmit(event)}>
+                <input
+                    value={name}
+                    type='text'
+                    placeholder="Search country..."
+                    onChange={(event) => handleInput(event)}
+                />
+                <button type="submit" >Search</button>
+            </form>
         </div>
     )
 

@@ -25,9 +25,17 @@ export default function rootReducer(state = initialState, action) {
                 country: action.payload
             }
         case 'GET_COUNTRIES_BY_NAME':
-            return {
-                ...state,
-                countries: action.payload
+            if(action.payload.length !== 0){
+                return {
+                    ...state,
+                    countries: action.payload
+                }
+            }
+            else{
+                return {
+                    ...state,
+                    countries: "NO COUNTRIES FOUND"
+                }
             }
         case 'ORDER_BY_NAME':
             return {

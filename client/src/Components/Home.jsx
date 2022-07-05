@@ -4,31 +4,25 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import React from "react";
 import Paginado from "./Paginado.jsx";
-import Card from "./Card.jsx";
 import SearchBar from "./SearchBar.jsx";
 import FilterName from "./FilterName.jsx";
 import FilterPopulation from "./FilterPopulation.jsx"
 import FilterActivity from "./FilterActivity.jsx"
 import FilterContinent from "./FilterContinent.jsx"
 import '../CSS/Home.css'
-import Loading from '../CSS/Imagenes/Loading.gif'
 import VideoHome from '../CSS/Videos/VideoHome.mp4'
+import Countries from "./Countries.jsx";
 
 export default function Home() {
 
     const dispatch = useDispatch()
     const countries = useSelector(state => state.countries)
-    //const allCountries = useSelector(state => state.allountries)
 
     const [currentPage, setCurrentPage] = useState(1)
     const countriesXPage = 10
     const indexOfLastCountry = currentPage * countriesXPage
     const indexOfFirstCountry = indexOfLastCountry - countriesXPage
     const currentCountries = countries.slice(indexOfFirstCountry, indexOfLastCountry)
-
-    let pages = (pageNumber) => {
-        setCurrentPage(pageNumber)
-    }
 
     useEffect(() => {
         dispatch(getAllCountries())
@@ -42,13 +36,13 @@ export default function Home() {
             </div>
 
             <nav className="Nav_Home">
-                <FilterName />
+                <FilterName pages={setCurrentPage}/>
 
-                <FilterPopulation />
+                <FilterPopulation pages={setCurrentPage}/>
 
-                <FilterActivity />
+                <FilterActivity pages={setCurrentPage}/>
 
-                <FilterContinent />
+                <FilterContinent pages={setCurrentPage}/>
             </nav>
 
             <nav className="MainNav">
@@ -64,27 +58,11 @@ export default function Home() {
             <Paginado
                 countriesXPage={countriesXPage}
                 allCountries={countries.length}
-                pages={pages}
-                currentPage={currentPage}
+                pages={setCurrentPage}
             />
 
-            <div className="Cards">
-                {
-                    currentCountries.length > 0 ?
-                        currentCountries.map(country => {
-                            return (
-                                <div key={country.id} >
-                                    <Card name={country.name} id={country.id} img={country.img} continent={country.continent} />
-                                </div>
-                            )
-                        })
-                        :
-                        <div>
-                            <h3>Loading...</h3>
-                            <img src={Loading} alt="Cargando" />
-                        </div>
-                }
-            </div>
+            <Countries currentCountries={currentCountries}/>
+
         </div>
     )
 }

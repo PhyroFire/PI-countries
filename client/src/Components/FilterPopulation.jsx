@@ -2,11 +2,13 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { orderByPopulation } from "../Actions/Index";
 
-export default function FilterPopulation() {
+export default function FilterPopulation({pages}) {
 
     const dispatch = useDispatch()
     function handleOrderByPopulation(event) {
+        event.preventDefault()
         dispatch(orderByPopulation(event.target.value))
+        pages(1)
     }
 
     return (

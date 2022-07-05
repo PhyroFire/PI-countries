@@ -6,12 +6,15 @@ import video from '../CSS/Videos/IntroVid.mp4'
 
 
 export default function LandingPage() {
+
+
+
     return (
         <div className="body_landing">
 
             <div className="landing">
 
-                <video autoPlay preload="auto" loop src={video}></video>
+                <video autoPlay="autoplay" muted type={"video/mp4"} preload="auto" loop src={video}></video>
                 <Link to='/home'>
                     <h1>Henry's Countries Proyect</h1>
                 </Link>
