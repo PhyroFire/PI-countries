@@ -33,10 +33,6 @@
     margin: 10px;
 }
 
-.Label input {
-    opacity: 50%;
-}
-
 .Select {
     display: flex;
     margin: 5px;
