@@ -1,4 +1,4 @@
-import { getAllCountries } from "../Actions/Index";
+import { getAllCountries, filterPopu50 } from "../Actions/Index";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -27,6 +27,17 @@ export default function Home() {
     useEffect(() => {
         dispatch(getAllCountries())
     }, [])
+    
+    // function filterPopu (event) {
+
+    //     let countriesPopu = countries.filter( pais => {
+    //        return pais.population < 50000
+    //     })
+
+    //     dispatch(filterPopu50(countriesPopu))
+    // }
+
+    console.log(countries)
 
     return (
         <div className="Home">
@@ -60,6 +71,9 @@ export default function Home() {
                 allCountries={countries.length}
                 pages={setCurrentPage}
             />
+            
+{/* 
+            <button onClick={(event) => filterPopu(event)}>filtrar</button> */}
 
             <Countries currentCountries={currentCountries}/>
 

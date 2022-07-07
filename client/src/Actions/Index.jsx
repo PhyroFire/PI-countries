@@ -85,3 +85,18 @@ export function getCountriesByContinents(continent) {
         })
     }
 }
+
+export function deleteActivityFromCountry(payload) {
+    return function () {
+        axios.delete(`/activities`, {data: payload})
+    }
+}
+
+// export function filterPopu50(payload) {
+//     return async function (dispatch) {
+//         dispatch({
+//             type: 'FILTER_POPU',
+//             payload: payload
+//         })
+//     }
+// }

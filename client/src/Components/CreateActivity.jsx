@@ -59,6 +59,12 @@ export default function CreateActivity() {
                 season: event.target.value
             })
         }
+        else {
+            setInput({
+                ...input,
+                season: ""
+            })
+        }
     }
 
     function handleSelectCountry(event) {
@@ -129,21 +135,29 @@ export default function CreateActivity() {
                         placeholder="Your activity name..."
                         onChange={(event) => handleInput(event)}
                     />
+                    {
+                        input.name ?         
+                                <p></p>             
+                            :            
+                                <p>"Debe ingresar un name"</p>
+
+                    }
+
                 </div>
                 <div className="Label">
                     <label>Dificulty</label>
-
-                    {
-                        dificulty.map(number => {
-                            return (
-                                <div key={number}>
-                                    <input type="radio" value={number} onClick={(event) => handleRadio(event)} id={`${number}`} name="dificulty" />
-                                    <label htmlFor={`${number}`}> {number} </label>
-                                </div>
-                            )
-                        })
-                    }
-
+                    <div id="Dificulty">
+                        {
+                            dificulty.map(number => {
+                                return (
+                                    <div key={number}>
+                                        <input type="radio" value={number} onClick={(event) => handleRadio(event)} id={`${number}`} name="dificulty" />
+                                        <label htmlFor={`${number}`}> {number} </label>
+                                    </div>
+                                )
+                            })
+                        }
+                    </div>
                 </div>
                 <div className="Label">
                     <label>Duration</label>

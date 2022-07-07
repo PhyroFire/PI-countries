@@ -1,21 +1,34 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getCountryById } from "../Actions/Index";
+import { getCountryById, deleteActivityFromCountry } from "../Actions/Index";
 import React from "react";
 import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { Link, useNavigate  } from "react-router-dom";
 import "../CSS/CountryDetail.css"
 
 export default function Detail() {
 
 
     const dispatch = useDispatch()
+    const navigate = useNavigate();
     const country = useSelector(state => state.country)
     const { id } = useParams() // usa el parametro de la URL
 
     useEffect(() => {
         dispatch(getCountryById(id))
     }, [])
+
+    function handleDelete(event){
+
+        event.preventDefault()
+        let data = {
+            countryId : country.id,
+            activityId : event.target.value
+        }
+
+        dispatch(deleteActivityFromCountry(data))
+        navigate("/home");
+    }
 
     return (
         <div className="CountryDetail">
@@ -57,6 +70,8 @@ export default function Detail() {
                                 <p>Dificulty: {act.dificulty}</p>
                                 <p>Duration: {act.duration} Hours</p>
                                 <p>Season: {act.season}</p>
+
+                                <button value={act.id} onClick={(event)=>{if(window.confirm("Delete activity?"))handleDelete(event)}}>Delete Activity</button>
                             </div>
                         )
                     }

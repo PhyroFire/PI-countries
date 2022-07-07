@@ -78,3 +78,7 @@
     padding: 20px 80px;
     margin: 20px;
 }
+
+#Dificulty {
+    display: flex;
+}

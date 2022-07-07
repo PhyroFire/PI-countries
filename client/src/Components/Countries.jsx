@@ -13,8 +13,6 @@ export default function Countries({ currentCountries }) {
         dispatch(getAllCountries())
     }
 
-    console.log(currentCountries)
-
     return (
         <div className="Cards">
             {

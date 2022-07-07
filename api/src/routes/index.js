@@ -288,4 +288,24 @@ router.get('/continentFilter', async (req, res, next) => {
     }
 })
 
+router.delete('/activities', async (req, res, next) => {
+    let datos = req.body
+    try {
+        let country = await Country.findByPk(datos.countryId)
+        let activity = await Turism.findByPk(datos.activityId)
+
+        if(country && activity){
+            await country.removeTurism([activity])
+            res.json("Activity deleted from country")
+        }
+        else{
+            res.json("Can't resolve request")
+        }
+
+
+    } catch (error) {
+        next(error)
+    }
+})
+
 module.exports = router;

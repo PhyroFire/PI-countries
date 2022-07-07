@@ -25,13 +25,13 @@ export default function rootReducer(state = initialState, action) {
                 country: action.payload
             }
         case 'GET_COUNTRIES_BY_NAME':
-            if(action.payload.length !== 0){
+            if (action.payload.length !== 0) {
                 return {
                     ...state,
                     countries: action.payload
                 }
             }
-            else{
+            else {
                 return {
                     ...state,
                     countries: "NO COUNTRIES FOUND"
@@ -57,6 +57,12 @@ export default function rootReducer(state = initialState, action) {
                 ...state,
                 countries: action.payload
             }
+        // case 'FILTER_POPU':
+        //     return {
+        //         ...state,
+        //         countries: action.payload,
+        //     }
+
         default: return state
     }
 }
