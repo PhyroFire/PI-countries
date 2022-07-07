@@ -26,10 +26,6 @@
     align-items: center;
 }
 
-.CreateInput {
-    opacity: 100%;
-}
-
 .Label {
     display: flex;
     flex-direction: column;

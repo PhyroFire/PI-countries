@@ -127,7 +127,6 @@ export default function CreateActivity() {
                 <div className="Label">
                     <label>Name</label>
                     <input
-                        className="CreateInput"
                         type='text'
                         size="40"
                         value={input.name}
@@ -135,14 +134,12 @@ export default function CreateActivity() {
                         placeholder="Your activity name..."
                         onChange={(event) => handleInput(event)}
                     />
-                    {
+                    {/* {
                         input.name ?         
                                 <p></p>             
                             :            
                                 <p>"Debe ingresar un name"</p>
-
-                    }
-
+                    } */}
                 </div>
                 <div className="Label">
                     <label>Dificulty</label>
