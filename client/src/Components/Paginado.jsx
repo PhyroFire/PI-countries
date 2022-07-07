@@ -9,10 +9,6 @@ export default function Paginado({ countriesXPage, allCountries, pages, currentP
         pageNumbers.push(index)
     }
 
-    if (currentPage > pageNumbers.length) { // ARREGLAR
-        pages(1)
-    }
-
     return (
         <nav>
             <ul className="Paginado">

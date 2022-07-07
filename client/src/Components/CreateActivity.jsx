@@ -14,8 +14,8 @@ export default function CreateActivity() {
 
     const [input, setInput] = useState({
         name: "",
-        dificulty: 0,
-        duration: 0,
+        dificulty: null,
+        duration: "",
         season: "",
         countries: [],
     })
@@ -23,6 +23,25 @@ export default function CreateActivity() {
     useEffect(() => {
         dispatch(orderByName("Ascendente"))
     }, [])
+
+    function handleRadio(event) {
+
+        let currentRadio = document.getElementById(event.target.id);
+
+        if (event.target.id === input.dificulty) {
+            currentRadio.checked = false
+            setInput({
+                ...input,
+                "dificulty": null
+            })
+        }
+        else {
+            setInput({
+                ...input,
+                "dificulty": event.target.value
+            })
+        }
+    }
 
     function handleInput(event) {
         event.preventDefault()
@@ -67,15 +86,27 @@ export default function CreateActivity() {
     function handleSubmit(event) {
         event.preventDefault()
 
-        if (input.name === "" || input.dificulty === "" || input.duration === 0 || input.season === "" || input.countries === []) {
-            return alert("You must complete all forms to create a activity")
+        if (input.name === "") {
+            return alert("Activity NAME required")
+        }
+        else if (input.dificulty === null) {
+            return alert("Activity DIFICULTY required")
+        }
+        else if (input.duration === "") {
+            return alert("Activity DURATION required")
+        }
+        else if (input.season === "") {
+            return alert("Activity SEASON required")
+        }
+        else if (input.countries === []) {
+            return alert("Activities should be assigned to COUNTRIES")
         }
         dispatch(postActivity(input))
         alert("Activity created!")
         setInput({
             name: "",
-            dificulty: 0,
-            duration: 0,
+            dificulty: null,
+            duration: "",
             season: "",
             countries: [],
         })
@@ -90,6 +121,7 @@ export default function CreateActivity() {
                 <div className="Label">
                     <label>Name</label>
                     <input
+                        className="CreateInput"
                         type='text'
                         size="40"
                         value={input.name}
@@ -100,14 +132,18 @@ export default function CreateActivity() {
                 </div>
                 <div className="Label">
                     <label>Dificulty</label>
-                    <input
-                        type='number'
-                        value={input.dificulty}
-                        name='dificulty'
-                        min="1" max="5"
-                        placeholder=" Dificulty of the activity"
-                        onChange={(event) => handleInput(event)}
-                    />
+
+                    {
+                        dificulty.map(number => {
+                            return (
+                                <div key={number}>
+                                    <input type="radio" value={number} onClick={(event) => handleRadio(event)} id={`${number}`} name="dificulty" />
+                                    <label htmlFor={`${number}`}> {number} </label>
+                                </div>
+                            )
+                        })
+                    }
+
                 </div>
                 <div className="Label">
                     <label>Duration</label>

@@ -1,16 +1,5 @@
 const axios = require('axios');
 
-// export function getAllCountries() {
-//     return function (dispatch) {
-//         fetch('http://localhost:3001/countries')
-//             .then(res => res.json())
-//             .then(resToJson => dispatch({
-//                 type: 'GET_ALL_COUNTRIES',
-//                 payload: resToJson
-//             }))
-//     }
-// }
-
 export function getAllCountries() {
     return async function (dispatch) {
         let response = await axios(`/countries`)
