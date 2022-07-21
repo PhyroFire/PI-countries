@@ -37,8 +37,6 @@ export default function Home() {
     //     dispatch(filterPopu50(countriesPopu))
     // }
 
-    console.log(countries)
-
     return (
         <div className="Home">
             <video autoPlay preload="auto" muted loop src={VideoHome}></video>
